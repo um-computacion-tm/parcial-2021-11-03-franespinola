@@ -22,18 +22,45 @@ class Buscaminas():
         pass
 
     def show_board(self):
-        pass
+        return print(self.board)
 
-    def question(self):
-        pass
+    
+    def question(self, movs):
+        self.moves = movs
+        movs = ['flag', 'uncover']
+
+        while True:
+            mov = input('Elegir Movimiento:\n1) Flag 2) Uncover\n')
+            if mov.lower() not in ('flag', 'uncover'):
+                raise Exception()
+            else:
+                break
+
+        while True:
+            row = input('\nIngrese la fila a cambiar: ')
+            if str(row) not in [str(x) for x in range(self.rows)]:
+                raise Exception()
+            else:
+                row = int(row)
+                break
+
+        while True:
+            col = input('\nIngrese la columna a cambiar: ')
+            if str(col) not in [str(x) for x in range(self.cols)]:
+                raise Exception()
+            else:
+                col = int(col)
+                break
+
+        return [mov, row, col]
 
     def win(self):
-        count = 1
+        count = 0
         for x in range(len(self.board)):
             if "F" in self.board[x]:
                 count += 1
                 print(count)
-        if count != 9:
+        if count != 8:
             return True
         return False
 
